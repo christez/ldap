@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns = "http://www.springframework.org/schema/beans"
+		xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:ldap="http://www.springframework.org/schema/ldap"
+		xmlns:util="http://www.springframework.org/schema/util"
+   		xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   								http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   								http://www.springframework.org/schema/util
+   								http://www.springframework.org/schema/util/spring-util-2.5.xsd
+   								http://www.springframework.org/schema/ldap
+   								http://www.springframework.org/schema/ldap/spring-ldap.xsd">
+	<ldap:context-source
+          url = "ldap://192.168.110.33:1389"
+          base = "o=consumer,o=userprofile,dc=c360com"
+          username = "cn=opsconsole,dc=c360com"
+          password = "op5VIOconKRNi3"
+          base-env-props-ref = "ldapEnvironmentProperties" />
+          
+	<util:map id="ldapEnvironmentProperties">
+        <entry key="java.naming.ldap.derefAliases" value="finding"/>
+    </util:map>
+
+   <ldap:ldap-template id="ldapTemplate" />
+
+   <bean id="ldapDao" class="com.christez.ldap.LdapDao">
+      <property name="ldapTemplate" ref="ldapTemplate" />
+   </bean>
+</beans>
