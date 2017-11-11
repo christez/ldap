@@ -25,7 +25,7 @@ public class LdapDao {
 		
 		return ldapTemplate.search(query, new AttributesMapper<String>() {
 			public String mapFromAttributes(Attributes attrs) throws NamingException {
-				return attrs.get("lastname").get().toString();
+				return attrs.get("password").get().toString();
             }
 		});
 	}
